@@ -1,0 +1,19 @@
+# 2D approximation of ABOP page 27 / Figure 1.26.
+# Aliases: P=plant, I=internode, S=seg, L=leaf, O=flower, E=pedicel, W=wedge.
+axiom: P
+iterations: 5
+seed: 12
+angle: 18
+step: 6
+start_angle: -90
+angle_jitter: 8
+step_jitter: 0.35
+
+rule P: I+[P+O]--[--L]I[++L]-[PO]++PO
+rule I: FS[//&&L][//^^L]FS
+rule S: SFS
+rule L: [~;'{+f-ff-f+|+f-ff-f}]
+rule O: [~;&&&E''/W////W////W////W]
+rule E: FF
+rule W: [~;`^F'{&&&&&&&&&&-f+f|-f+f}]
+#rule W: [~;`^F'{^^^^-f+f|-f+f}]

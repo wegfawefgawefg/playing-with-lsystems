@@ -1,0 +1,10 @@
+# Commands:
+# F/G draw, f moves, + turns clockwise, - turns counter-clockwise, [ pushes, ] pops.
+axiom: X
+iterations: 8
+angle: 25
+step: 7
+start_angle: -90
+
+rule X: F+[[X]-X]-F[-FX]+X
+rule F: FF

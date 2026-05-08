@@ -1,0 +1,59 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "cmake: configure (release)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/build.sh --configure-only",
+      "problemMatcher": ["$gcc", "$msCompile"],
+      "group": "build"
+    },
+    {
+      "label": "cmake: build (release)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/build.sh",
+      "problemMatcher": ["$gcc", "$msCompile"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": ["cmake: configure (release)"]
+    },
+    {
+      "label": "cmake: configure (dev)",
+      "type": "shell",
+      "command": "LSYSTEMS_PRESET=dev ${workspaceFolder}/scripts/build.sh --configure-only",
+      "problemMatcher": ["$gcc", "$msCompile"],
+      "group": "build"
+    },
+    {
+      "label": "cmake: build (dev)",
+      "type": "shell",
+      "command": "LSYSTEMS_PRESET=dev ${workspaceFolder}/scripts/build.sh",
+      "problemMatcher": ["$gcc", "$msCompile"],
+      "group": "build",
+      "dependsOn": ["cmake: configure (dev)"]
+    },
+    {
+      "label": "run lsystems",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/run.sh",
+      "args": ["examples/abop-page-27-inspired.lsys"],
+      "options": {
+        "env": {
+          "SDL_VIDEODRIVER": "x11"
+        }
+      }
+    },
+    {
+      "label": "run lsystems (dev)",
+      "type": "shell",
+      "command": "LSYSTEMS_PRESET=dev ${workspaceFolder}/scripts/run.sh examples/abop-page-27-inspired.lsys",
+      "options": {
+        "env": {
+          "SDL_VIDEODRIVER": "x11"
+        }
+      }
+    }
+  ]
+}

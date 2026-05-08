@@ -1,0 +1,21 @@
+{
+  "cmake.useCMakePresets": "always",
+  "cmake.configureOnOpen": true,
+  "cmake.buildDirectory": "${workspaceFolder}/build",
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.intelliSenseMode": "gcc-x64",
+  "C_Cpp.default.compilerPath": "/usr/bin/g++",
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+  "C_Cpp.clang_format_fallbackStyle": "file",
+  "C_Cpp.formatting": "clangFormat",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false
+}

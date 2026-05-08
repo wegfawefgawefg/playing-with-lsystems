@@ -1,0 +1,8 @@
+# Braces collect a filled polygon boundary from f/F/G movement.
+axiom: L
+iterations: 1
+angle: 45
+step: 28
+start_angle: -90
+
+rule L: {-f+f+f-|-f+f+f}

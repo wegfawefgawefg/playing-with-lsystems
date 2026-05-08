@@ -1,0 +1,11 @@
+# ABOP-style stochastic branch example.
+axiom: F
+iterations: 5
+seed: 7
+angle: 25
+step: 8
+start_angle: -90
+
+rule F 0.33: F[+F]F[-F]F
+rule F 0.33: F[+F]F
+rule F 0.34: F[-F]F
