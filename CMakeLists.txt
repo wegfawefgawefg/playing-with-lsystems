@@ -35,6 +35,32 @@ if (NOT SDL3_FOUND)
     FetchContent_MakeAvailable(SDL3)
 endif()
 
+FetchContent_Declare(
+    imgui
+    GIT_REPOSITORY https://github.com/ocornut/imgui.git
+    GIT_TAG v1.91.9b
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(imgui)
+
+add_library(imgui_sdl3_renderer STATIC
+    ${imgui_SOURCE_DIR}/imgui.cpp
+    ${imgui_SOURCE_DIR}/imgui_draw.cpp
+    ${imgui_SOURCE_DIR}/imgui_tables.cpp
+    ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_sdlrenderer3.cpp
+)
+
+target_include_directories(imgui_sdl3_renderer
+    PUBLIC
+        ${imgui_SOURCE_DIR}
+        ${imgui_SOURCE_DIR}/backends
+)
+
+target_link_libraries(imgui_sdl3_renderer PUBLIC SDL3::SDL3)
+target_compile_features(imgui_sdl3_renderer PUBLIC cxx_std_20)
+
 add_executable(lsystems
     src/lsystem.cpp
     src/main.cpp
@@ -42,7 +68,7 @@ add_executable(lsystems
 )
 
 target_compile_features(lsystems PRIVATE cxx_std_20)
-target_link_libraries(lsystems PRIVATE SDL3::SDL3)
+target_link_libraries(lsystems PRIVATE SDL3::SDL3 imgui_sdl3_renderer)
 
 target_compile_definitions(lsystems
     PRIVATE

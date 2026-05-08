@@ -74,9 +74,18 @@ For per-instance variation, `~` jitters the current turtle angle by up to `angle
 `;` multiplies the current step size by a random factor in `1 +/- step_jitter`. Put them inside
 brackets when you want the variation scoped to one leaf or flower.
 
-The renderer also applies a small deterministic "wet paint pull" pass after drawing. It renders the
-plant to an offscreen texture, reads the pixels back, classifies non-background pixels as stem, leaf,
-or flower by palette color, and pulls short vertical gradients downward from sampled plant pixels.
+The renderer draws the plant to a low-resolution offscreen canvas, then presents that canvas with
+nearest-neighbor integer scaling. The ImGui controls stay at normal window resolution, so the plant
+can be chunky without making the settings panel chunky too. The default internal canvas is the GBA
+resolution, 240x160.
+
+The renderer also applies a small deterministic "wet paint pull" pass after drawing: the plant pixels
+are classified as stem, leaf, or flower by palette color, then short vertical gradients are pulled
+downward from sampled plant pixels. The live settings panel can tune the internal canvas size,
+pulls-per-frame, per-layer pull toggles, pull distance, blur toggle, blur passes, blur strength, and
+wind. Wind bends rendered points in the chosen direction, with points farther from the root bending
+more strongly. Polygon color controls add slight deterministic hue variation to petals and a
+two-sided tint across leaf polygons.
 
 To only generate the expanded command string:
 
